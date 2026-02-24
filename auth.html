@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Speech Topic Gen</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body class="theme-dark font-serif">
+
+    <header>
+        <div class="menu-btn" id="menuBtn">
+            <span></span><span></span><span></span>
+        </div>
+        <nav class="dropdown-menu" id="dropdownMenu">
+            <ul id="menuList">
+                </ul>
+        </nav>
+    </header>
+    
+    <div class="auth-wrapper">
+        <div class="card">
+            <h2 id="authTitle">Welcome Back</h2>
+            
+            <form id="authForm">
+                <div class="form-group">
+                    <label for="email">Email address</label>
+                    <input type="email" id="email" class="form-control" required placeholder="you@example.com">
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" class="form-control" required placeholder="••••••••">
+                </div>
+                
+                <span id="errorMsg" class="error-msg"></span>
+                
+                <button type="submit" class="btn-primary btn-block" id="submitBtn">Log In</button>
+            </form>
+
+            <div class="auth-switch">
+                <span id="switchText">Don't have an account?</span> 
+                <a id="switchBtn">Sign Up</a>
+            </div>
+            
+            <div style="margin-top: 20px;">
+                <a href="index.html" style="color: var(--text-secondary); text-decoration: none; font-size: 0.9rem;">← Back to Home</a>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="js/menu.js"></script>
+    <script type="module" src="js/auth.js"></script>
+</body>
+</html>

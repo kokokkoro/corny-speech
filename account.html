@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account - Speech Topic Gen</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body class="theme-dark font-serif">
+    
+    <header>
+        <div class="menu-btn" id="menuBtn"><span></span><span></span><span></span></div>
+        <nav class="dropdown-menu" id="dropdownMenu"><ul id="menuList"></ul></nav>
+    </header>
+
+    <div class="auth-wrapper">
+        <div class="card">
+            <h2>Account</h2>
+            
+            <div class="form-group" style="margin-bottom: 30px;">
+                <label>Email Address</label>
+                <input type="text" id="userEmail" class="form-control" disabled style="opacity: 0.7;">
+            </div>
+
+            <form id="passwordForm">
+                <div class="form-group">
+                    <label for="newPassword">New Password</label>
+                    <input type="password" id="newPassword" class="form-control" required placeholder="Minimum 6 characters">
+                </div>
+                
+                <span id="accMsg" class="error-msg"></span>
+                <button type="submit" class="btn-primary btn-block" id="updateBtn">Update Password</button>
+            </form>
+
+            <div style="margin-top: 20px;">
+                <a href="index.html" style="color: var(--text-secondary); text-decoration: none; font-size: 0.9rem;">← Back to Home</a>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="js/menu.js"></script>
+    <script type="module" src="js/account.js"></script>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Speech Topic Gen</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body class="theme-dark font-serif">
+    
+    <header>
+        <div class="menu-btn" id="menuBtn">
+            <span></span><span></span><span></span>
+        </div>
+        <nav class="dropdown-menu" id="dropdownMenu">
+            <ul id="menuList">
+                </ul>
+        </nav>
+    </header>
+
+    <main class="container">
+        <section class="timer-section">
+            <div class="timer-wrapper">
+                <div class="timer-circle" id="timerCircle">
+                    <div class="timer-inner">
+                        <div class="time-display" id="timeDisplay">1:00</div>
+                        <div class="timer-controls">
+                            <button class="btn-time" id="subTime">-0:30</button>
+                            <button class="btn-time" id="addTime">+0:30</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="timer-actions">
+                <button class="btn-action" id="resetBtn">↺</button>
+                <button class="btn-action btn-play" id="playPauseBtn">▶</button>
+            </div>
+        </section>
+
+        <section class="randomizer-section">
+            <div class="slot-machine">
+                <div class="slot-window" id="slotWindow">
+                    </div>
+            </div>
+            <button class="btn-primary" id="spinBtn">Spin!</button>
+        </section>
+    </main>
+
+    <script type="module" src="js/menu.js"></script>
+    <script type="module" src="js/main.js"></script>
+</body>
+</html>

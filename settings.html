@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings - Speech Topic Gen</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body class="theme-dark font-serif">
+    
+    <header>
+        <div class="menu-btn" id="menuBtn">
+            <span></span><span></span><span></span>
+        </div>
+        <nav class="dropdown-menu" id="dropdownMenu">
+            <ul id="menuList"></ul>
+        </nav>
+    </header>
+
+    <div class="auth-wrapper">
+        <div class="card">
+            <h2>Settings</h2>
+            
+            <form id="settingsForm">
+                <div class="form-group">
+                    <label for="themeSelect">Theme</label>
+                    <select id="themeSelect" class="form-control">
+                        <option value="dark">Dark (Modern)</option>
+                        <option value="light">Light (Pastel)</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="fontSelect">Typography</label>
+                    <select id="fontSelect" class="form-control">
+                        <option value="serif">Serif (Playfair Display)</option>
+                        <option value="sans">Sans-serif (Inter)</option>
+                    </select>
+                </div>
+                
+                <span id="saveMsg" class="error-msg" style="color: #10b981;"></span>
+                
+                <button type="submit" class="btn-primary btn-block" id="saveBtn">Save Changes</button>
+            </form>
+
+            <div style="margin-top: 20px;">
+                <a href="index.html" style="color: var(--text-secondary); text-decoration: none; font-size: 0.9rem;">← Back to Home</a>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="js/menu.js"></script>
+    <script type="module" src="js/settings.js"></script>
+</body>
+</html>

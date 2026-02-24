@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Categories & Topics - Speech Topic Gen</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body class="theme-dark font-serif">
+    
+    <header>
+        <div class="menu-btn" id="menuBtn">
+            <span></span><span></span><span></span>
+        </div>
+        <nav class="dropdown-menu" id="dropdownMenu">
+            <ul id="menuList"></ul>
+        </nav>
+    </header>
+
+    <main class="categories-wrapper">
+        <h1 class="page-title">Manage Topics</h1>
+        
+        <div class="add-box">
+            <input type="text" id="newCatName" class="form-control" placeholder="Create a new custom category..." maxlength="32">
+            <button class="btn-time" id="addCatBtn" style="background: var(--primary-accent); color: white; border:none;">Add Category</button>
+        </div>
+
+        <div id="categoriesContainer">
+            <p style="text-align: center; color: var(--text-secondary);">Loading data...</p>
+        </div>
+    </main>
+
+    <script type="module" src="js/menu.js"></script>
+    <script type="module" src="js/categories.js"></script>
+</body>
+</html>
