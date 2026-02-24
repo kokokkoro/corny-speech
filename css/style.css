@@ -43,9 +43,8 @@ body { background-color: var(--bg-color); color: var(--text-primary); min-height
 .container { display: flex; flex-direction: column; min-height: 100vh; padding: 80px 20px 20px;}
 
 @media (min-width: 768px) {
-    .container { flex-direction: row; align-items: center; justify-content: center; padding-top: 20px; }
+    .container { flex-direction: row; align-items: center; justify-content: center; padding-top: 80px; }
     .timer-section, .randomizer-section { width: 50%; display: flex; flex-direction: column; align-items: center; }
-    body:not(.auth-page) .container { margin-top: 40px; }
 }
 
 header {
@@ -244,3 +243,40 @@ header {
     color: var(--text-secondary); pointer-events: none; z-index: 2;
 }
 .input-with-icon input, .input-with-icon select { padding-left: 38px; width: 100%; }
+
+.timer-section, .randomizer-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+.timer-wrapper, .timer-actions {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.topic-item {
+    font-size: 1.1rem;
+    padding: 0 10px;
+}
+.topic-item.active { 
+    font-size: 1.4rem;
+    font-weight: 700; 
+}
+
+@media (min-width: 768px) {
+    .topic-item { font-size: 1.5rem; padding: 0 20px; }
+    .topic-item.active { font-size: 2rem; }
+}
+
+select.form-control {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    padding-left: 38px !important;
+    padding-right: 30px !important;
+    background-image: url('data:image/svg+xml;utf8,<svg fill="%23888888" height="20" viewBox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>');
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+}

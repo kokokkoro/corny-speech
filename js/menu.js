@@ -78,7 +78,7 @@ async function checkAuth() {
                 <li><a href="auth.html">${icons.login} Log In</a></li>
             `;
         }
-        document.body.className = 'theme-dark font-serif';
+        document.body.className = 'theme-dark font-sans';
     }
 }
 
