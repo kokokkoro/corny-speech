@@ -40,10 +40,24 @@
 
         <section class="randomizer-section">
             <div class="slot-machine">
-                <div class="slot-window" id="slotWindow">
-                    </div>
+                <div class="slot-window" id="slotWindow"></div>
             </div>
-            <button class="btn-primary" id="spinBtn">Spin!</button>
+            
+            <div style="display: flex; gap: 15px; justify-content: center; align-items: center;">
+                <button class="btn-primary" id="spinBtn">Spin!</button>
+                
+                <div class="input-with-icon" style="flex: none; width: auto;">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+                    
+                    <select id="mainLangSelect" class="form-control" style="height: 100%; padding: 12px 15px 12px 38px; cursor: pointer;">
+                        <option value="all">All Langs</option>
+                        <option value="en">EN</option>
+                        <option value="tr">TR</option>
+                        <option value="ru">RU</option>
+                        <option value="kz">KZ</option>
+                    </select>
+                </div>
+            </div>
         </section>
     </main>
 

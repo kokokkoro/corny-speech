@@ -52,13 +52,18 @@ const itemHeight = 100;
 
 async function loadTopics() {
     const { data: { session } } = await supabase.auth.getSession();
+    const selectedLang = document.getElementById('mainLangSelect').value;
     
-    let query = supabase.from('topics').select('id, content, category_id');
+    let query = supabase.from('topics').select('id, content, category_id, categories!inner(lang)');
     
     if (session) {
         query = query.or(`user_id.is.null,user_id.eq.${session.user.id}`);
     } else {
         query = query.is('user_id', null);
+    }
+
+    if (selectedLang !== 'all') {
+        query = query.eq('categories.lang', selectedLang);
     }
 
     const { data: allTopics, error } = await query;
@@ -91,6 +96,8 @@ async function loadTopics() {
         slotWindow.innerHTML = '<div class="topic-item active">No topics found</div>';
     }
 }
+
+document.getElementById('mainLangSelect').addEventListener('change', loadTopics);
 
 function setupInitialSlot() {
     slotWindow.innerHTML = '';

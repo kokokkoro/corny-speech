@@ -83,3 +83,11 @@ async function checkAuth() {
 }
 
 checkAuth();
+
+document.addEventListener('click', (e) => {
+    if (menuBtn && dropdownMenu) {
+        if (!menuBtn.contains(e.target) && !dropdownMenu.contains(e.target)) {
+            dropdownMenu.classList.remove('active');
+        }
+    }
+});

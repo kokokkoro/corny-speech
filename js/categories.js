@@ -3,12 +3,33 @@ import { supabase } from './supabase.js';
 const container = document.getElementById('categoriesContainer');
 const newCatName = document.getElementById('newCatName');
 const addCatBtn = document.getElementById('addCatBtn');
+const flags = { en: 'EN', tr: 'TR', ru: 'RU', kz: 'KZ' };
+const filterLangBtn = document.getElementById('filterLangBtn');
+const filterLangMenu = document.getElementById('filterLangMenu');
 
 let currentUser = null;
 let categories = [];
 let topics = [];
 let hiddenTopicIds = [];
 let hiddenCategoryIds = [];
+
+filterLangBtn.addEventListener('click', () => filterLangMenu.classList.toggle('active'));
+
+document.addEventListener('click', (e) => {
+    if (!filterLangBtn.contains(e.target) && !filterLangMenu.contains(e.target)) {
+        filterLangMenu.classList.remove('active');
+    }
+});
+
+const searchCatInput = document.getElementById('searchCat');
+searchCatInput.addEventListener('input', render);
+searchCatInput.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') {
+        e.preventDefault();
+        searchCatInput.blur();
+    }
+});
+document.querySelectorAll('.lang-checkbox').forEach(cb => cb.addEventListener('change', render));
 
 async function init() {
     const { data: { session } } = await supabase.auth.getSession();
@@ -35,9 +56,18 @@ async function loadData() {
 
 function render() {
     container.innerHTML = '';
-    if (categories.length === 0) return container.innerHTML = '<p>No categories found.</p>';
+    const searchText = document.getElementById('searchCat').value.toLowerCase();
+    const checkedLangs = Array.from(document.querySelectorAll('.lang-checkbox:checked')).map(cb => cb.value);
 
-    categories.forEach(cat => {
+    const filteredCats = categories.filter(cat => {
+        const matchSearch = cat.name.toLowerCase().includes(searchText);
+        const matchLang = checkedLangs.includes(cat.lang);
+        return matchSearch && matchLang;
+    });
+
+    if (filteredCats.length === 0) return container.innerHTML = '<p>No categories found for this filter.</p>';
+
+    filteredCats.forEach(cat => {
         const catTopics = topics.filter(t => t.category_id === cat.id);
         const isBaseCat = cat.user_id === null;
         const isCatHidden = hiddenCategoryIds.includes(cat.id);
@@ -48,7 +78,9 @@ function render() {
         let html = `
             <div class="cat-header ${isCatHidden ? 'hidden-cat' : ''}" data-toggle="${cat.id}">
                 <div>
-                    <span class="cat-title">${cat.name}</span>
+                    <span class="cat-title">
+                        <span style="color: var(--text-secondary); font-size: 0.8em; margin-right: 8px; font-family: var(--font-sans); font-weight: 600;">${flags[cat.lang] || ''}</span>${cat.name}
+                    </span>
                     <span class="badge">${isBaseCat ? 'Base' : 'Custom'}</span>
                     <span style="font-size:0.8rem; margin-left:10px; color:var(--text-secondary)">▼</span>
                 </div>
@@ -181,9 +213,10 @@ newCatName.addEventListener('keypress', (e) => {
 
 addCatBtn.addEventListener('click', async () => {
     const name = newCatName.value.trim();
+    const lang = document.getElementById('newCatLang').value;
     if (!name) return;
     addCatBtn.disabled = true;
-    await supabase.from('categories').insert({ name: name, lang: 'en', user_id: currentUser.id });
+    await supabase.from('categories').insert({ name: name, lang: lang, user_id: currentUser.id });
     newCatName.value = '';
     addCatBtn.disabled = false;
     await loadData();

@@ -26,7 +26,22 @@
             <form id="passwordForm">
                 <div class="form-group">
                     <label for="newPassword">New Password</label>
-                    <input type="password" id="newPassword" class="form-control" required placeholder="Minimum 6 characters">
+                    <div class="pwd-wrapper">
+                        <input type="password" id="newPassword" class="form-control" required placeholder="Min 6 characters">
+                        <button type="button" class="eye-btn" onclick="togglePwd('newPassword', this)">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="confirmNewPassword">Confirm New Password</label>
+                    <div class="pwd-wrapper">
+                        <input type="password" id="confirmNewPassword" class="form-control" required placeholder="Repeat password">
+                        <button type="button" class="eye-btn" onclick="togglePwd('confirmNewPassword', this)">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                        </button>
+                    </div>
                 </div>
                 
                 <span id="accMsg" class="error-msg"></span>

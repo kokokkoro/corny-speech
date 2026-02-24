@@ -14,8 +14,7 @@
             <span></span><span></span><span></span>
         </div>
         <nav class="dropdown-menu" id="dropdownMenu">
-            <ul id="menuList">
-                </ul>
+            <ul id="menuList"></ul>
         </nav>
     </header>
     
@@ -28,13 +27,28 @@
                     <label for="email">Email address</label>
                     <input type="email" id="email" class="form-control" required placeholder="you@example.com">
                 </div>
+                
                 <div class="form-group">
                     <label for="password">Password</label>
-                    <input type="password" id="password" class="form-control" required placeholder="••••••••">
+                    <div class="pwd-wrapper">
+                        <input type="password" id="password" class="form-control" required placeholder="••••••••">
+                        <button type="button" class="eye-btn" onclick="togglePwd('password', this)">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="form-group" id="confirmPwdGroup" style="display: none;">
+                    <label for="confirmPassword">Confirm Password</label>
+                    <div class="pwd-wrapper">
+                        <input type="password" id="confirmPassword" class="form-control" placeholder="••••••••">
+                        <button type="button" class="eye-btn" onclick="togglePwd('confirmPassword', this)">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                        </button>
+                    </div>
                 </div>
                 
                 <span id="errorMsg" class="error-msg"></span>
-                
                 <button type="submit" class="btn-primary btn-block" id="submitBtn">Log In</button>
             </form>
 
