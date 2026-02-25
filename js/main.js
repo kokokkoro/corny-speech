@@ -5,6 +5,8 @@ let timeLeft = baseTime;
 let timerId = null;
 const timeDisplay = document.getElementById('timeDisplay');
 const rootElement = document.documentElement;
+const playIcon = '<svg viewBox="0 0 24 24" width="45" height="45" fill="currentColor" style="transform: translateX(0px);"><path d="M8 5v14l11-7z"/></svg>';
+const pauseIcon = '<svg viewBox="0 0 24 24" width="40" height="40" fill="currentColor"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>';
 
 function updateTimerDisplay() {
     const m = Math.floor(timeLeft / 60);
@@ -25,20 +27,22 @@ document.getElementById('resetBtn').addEventListener('click', () => {
     clearInterval(timerId); timerId = null; 
     timeLeft = 60; baseTime = 60;
     updateTimerDisplay();
-    document.getElementById('playPauseBtn').textContent = '▶';
+    document.getElementById('playPauseBtn').innerHTML = playIcon;
 });
 
 document.getElementById('playPauseBtn').addEventListener('click', function() {
     if (timerId) {
-        clearInterval(timerId); timerId = null; this.textContent = '▶';
+        clearInterval(timerId); timerId = null; 
+        this.innerHTML = playIcon;
     } else {
         if (timeLeft === 0) return;
-        this.textContent = '⏸';
+        this.innerHTML = pauseIcon;
         timerId = setInterval(() => {
             if (timeLeft > 0) { 
                 timeLeft--; updateTimerDisplay(); 
             } else { 
-                clearInterval(timerId); timerId = null; this.textContent = '▶'; 
+                clearInterval(timerId); timerId = null; 
+                this.innerHTML = playIcon;
                 alert("Time is up!"); 
             }
         }, 1000);

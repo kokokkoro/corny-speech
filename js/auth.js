@@ -53,7 +53,11 @@ forgotPwdBtn.addEventListener('click', async () => {
     if (!resetEmail) return;
 
     try {
-        const { data, error } = await supabase.auth.resetPasswordForEmail(resetEmail);
+        const resetUrl = window.location.origin + window.location.pathname.replace('auth.html', 'account.html');
+
+        const { data, error } = await supabase.auth.resetPasswordForEmail(resetEmail, {
+            redirectTo: resetUrl
+        });
         if (error) throw error;
         alert('One-time link sent! Please update your password after login.');
     } catch (error) {
@@ -88,7 +92,15 @@ authForm.addEventListener('submit', async (e) => {
             if (error) throw error;
             window.location.href = 'index.html';
         } else {
-            const { data, error } = await supabase.auth.signUp({ email, password });
+            const redirectUrl = window.location.origin + window.location.pathname.replace('auth.html', 'index.html');
+
+            const { data, error } = await supabase.auth.signUp({ 
+                email, 
+                password,
+                options: {
+                    emailRedirectTo: redirectUrl
+                }
+            });
             if (error) throw error;
             
             alert('Registration successful! Please check your email to confirm your account.');
@@ -96,7 +108,7 @@ authForm.addEventListener('submit', async (e) => {
         }
     } catch (error) {
         if (error.message.includes('Email not confirmed')) {
-            errorMsg.textContent = 'Please confirm your email. We sent you a link!';
+            errorMsg.textContent = 'Please confirm your email. Check your inbox for the confirmation link.';
         } else if (error.message.includes('Invalid login credentials')) {
             errorMsg.textContent = 'Invalid email or password.';
         } else {
