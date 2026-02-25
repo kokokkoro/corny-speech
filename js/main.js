@@ -25,7 +25,8 @@ document.getElementById('subTime').addEventListener('click', () => {
 });
 document.getElementById('resetBtn').addEventListener('click', () => {
     clearInterval(timerId); timerId = null; 
-    timeLeft = 60; baseTime = 60;
+    timeLeft = baseTime; 
+    
     updateTimerDisplay();
     document.getElementById('playPauseBtn').innerHTML = playIcon;
 });
