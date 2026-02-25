@@ -47,12 +47,13 @@ document.getElementById('playPauseBtn').addEventListener('click', function() {
 
 const spinBtn = document.getElementById('spinBtn');
 const slotWindow = document.getElementById('slotWindow');
+const mainLangSelect = document.getElementById('mainLangSelect');
 let topicsPool = [];
 const itemHeight = 100;
 
-async function loadTopics() {
+async function loadTopics(updateUI = true) {
     const { data: { session } } = await supabase.auth.getSession();
-    const selectedLang = document.getElementById('mainLangSelect').value;
+    const selectedLang = mainLangSelect.value;
     
     let query = supabase.from('topics').select('id, content, category_id, categories!inner(lang)');
     
@@ -87,17 +88,20 @@ async function loadTopics() {
 
         topicsPool = finalTopics.map(t => t.content);
         
-        if (topicsPool.length > 0) {
-            setupInitialSlot();
-        } else {
-            slotWindow.innerHTML = '<div class="topic-item active">All topics hidden</div>';
+        if (updateUI) {
+            if (topicsPool.length > 0) {
+                setupInitialSlot();
+            } else {
+                slotWindow.innerHTML = '<div class="topic-item active">All topics hidden</div>';
+            }
         }
     } else {
-        slotWindow.innerHTML = '<div class="topic-item active">No topics found</div>';
+        topicsPool = [];
+        if (updateUI) {
+            slotWindow.innerHTML = '<div class="topic-item active">No topics found</div>';
+        }
     }
 }
-
-document.getElementById('mainLangSelect').addEventListener('change', loadTopics);
 
 function setupInitialSlot() {
     slotWindow.innerHTML = '';
@@ -123,9 +127,15 @@ function buildSpinningList() {
     }
 }
 
-spinBtn.addEventListener('click', () => {
-    if (topicsPool.length === 0) return;
+spinBtn.addEventListener('click', async () => {
     spinBtn.disabled = true;
+    await loadTopics(false); 
+
+    if (topicsPool.length === 0) {
+        slotWindow.innerHTML = '<div class="topic-item active">No topics found</div>';
+        spinBtn.disabled = false;
+        return;
+    }
     
     slotWindow.style.transition = 'none';
     slotWindow.style.transform = `translateY(0px)`;
@@ -148,4 +158,4 @@ spinBtn.addEventListener('click', () => {
 });
 
 updateTimerDisplay();
-loadTopics();
+loadTopics(true);

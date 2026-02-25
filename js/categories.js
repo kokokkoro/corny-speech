@@ -63,6 +63,18 @@ function render() {
         const matchSearch = cat.name.toLowerCase().includes(searchText);
         const matchLang = checkedLangs.includes(cat.lang);
         return matchSearch && matchLang;
+    }).sort((a, b) => {
+        const isCustomA = a.user_id !== null;
+        const isCustomB = b.user_id !== null;
+
+        if (isCustomA && !isCustomB) return -1;
+        if (!isCustomA && isCustomB) return 1;
+
+        if (isCustomA && isCustomB) {
+            return new Date(b.created_at) - new Date(a.created_at);
+        }
+
+        return 0; 
     });
 
     if (filteredCats.length === 0) return container.innerHTML = '<p>No categories found for this filter.</p>';

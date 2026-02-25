@@ -8,6 +8,7 @@ const errorMsg = document.getElementById('errorMsg');
 const authTitle = document.getElementById('authTitle');
 const switchBtn = document.getElementById('switchBtn');
 const switchText = document.getElementById('switchText');
+const forgotPwdBtn = document.getElementById('forgotPwdBtn');
 
 let isLoginMode = true;
 
@@ -33,6 +34,7 @@ switchBtn.addEventListener('click', () => {
         switchBtn.textContent = 'Sign Up';
         confirmGroup.style.display = 'none';
         document.getElementById('confirmPassword').removeAttribute('required');
+        forgotPwdBtn.style.display = 'inline-block';
     } else {
         authTitle.textContent = 'Create Account';
         submitBtn.textContent = 'Sign Up';
@@ -40,12 +42,28 @@ switchBtn.addEventListener('click', () => {
         switchBtn.textContent = 'Log In';
         confirmGroup.style.display = 'block';
         document.getElementById('confirmPassword').setAttribute('required', 'true');
+        forgotPwdBtn.style.display = 'none';
+    }
+});
+
+forgotPwdBtn.addEventListener('click', async () => {
+    const email = emailInput.value.trim();
+    const resetEmail = window.prompt('Enter your email to receive a password reset link:', email);
+    
+    if (!resetEmail) return;
+
+    try {
+        const { data, error } = await supabase.auth.resetPasswordForEmail(resetEmail);
+        if (error) throw error;
+        alert('One-time link sent! Please update your password after login.');
+    } catch (error) {
+        alert('Error: ' + error.message);
     }
 });
 
 authForm.addEventListener('submit', async (e) => {
-    e.preventDefault();
-
+    e.preventDefault(); 
+    
     const email = emailInput.value.trim();
     const password = passwordInput.value.trim();
     const confirmPassword = document.getElementById('confirmPassword').value.trim();
@@ -73,11 +91,17 @@ authForm.addEventListener('submit', async (e) => {
             const { data, error } = await supabase.auth.signUp({ email, password });
             if (error) throw error;
             
-            alert('Registration successful! You can now log in.');
-            switchBtn.click();
+            alert('Registration successful! Please check your email to confirm your account.');
+            switchBtn.click(); 
         }
     } catch (error) {
-        errorMsg.textContent = error.message;
+        if (error.message.includes('Email not confirmed')) {
+            errorMsg.textContent = 'Please confirm your email. We sent you a link!';
+        } else if (error.message.includes('Invalid login credentials')) {
+            errorMsg.textContent = 'Invalid email or password.';
+        } else {
+            errorMsg.textContent = error.message; 
+        }
     } finally {
         submitBtn.disabled = false;
         submitBtn.textContent = isLoginMode ? 'Log In' : 'Sign Up';
