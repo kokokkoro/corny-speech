@@ -1,6 +1,6 @@
 {
   "name": "Corny Speech",
-  "short_name": "Corny",
+  "short_name": "Corny Speech",
   "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#121212",
